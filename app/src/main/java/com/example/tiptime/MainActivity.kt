@@ -15,12 +15,14 @@
  */
 package com.example.tiptime
 
+import android.graphics.drawable.shapes.Shape
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.annotation.VisibleForTesting
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -32,6 +34,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
@@ -48,12 +51,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.tiptime.ui.theme.TipTimeTheme
 import java.text.NumberFormat
 
@@ -85,12 +91,27 @@ fun TipTimeLayout() {
     var roundUp by remember { mutableStateOf(false) }
 
     val tip = calculateTip(amount, tipPercent, roundUp)
+    val roundedCornerShape: RoundedCornerShape = RoundedCornerShape(20.dp)
 
     Column(
         modifier = Modifier.padding(40.dp).verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
+        Text(text = "Natalia Lopez Osorio",
+            modifier = Modifier
+                .background(color = Color.LightGray,
+                    shape = roundedCornerShape)
+                .padding(16.dp),
+            fontSize = 23.sp,
+            fontWeight = FontWeight.Bold)
+        Text(text = "2025618",
+            modifier = Modifier
+                .background(color = Color(238,237,238),
+                    shape = roundedCornerShape)
+                .padding(10.dp),
+            fontSize = 15.sp,
+            fontWeight = FontWeight.Bold)
         Text(
             text = stringResource(R.string.calculate_tip),
             modifier = Modifier
